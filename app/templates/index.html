@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <title>Play NFT Club</title>
+
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+  <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    {% include "./reuse/header.html" %}
+
+    {% include "./reuse/nav_games.html" %}
+
+    <main class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <div class="col-8 m-auto pt-2 pb-2 text-center">
+        <h1>CyberDragon BinaryX</h1>
+      </div>
+
+      <div class="row">
+        <div id="goldactualvalue" class="col mx-1 h5 rounded-pill bg-primary">Gold (USD) ${{cbr_dragon_price}}</div>
+        <div class="col mx-1 h5 rounded-pill bg-primary">BITCOIN (USD) ${{btc_price}}</div>
+        <div class="col mx-1 h5 rounded-pill bg-primary">BinaryX (USD) ${{bnx_price}}</div>
+      </div>
+
+      <div class="col-8 m-auto pt-3 pb-3 text-center">
+        <a href="/form" class="btn btn-success">Add Job</a>
+        <a href="" id="generate-pwd-button" class="btn btn-success">Generate password</a>
+        <br>
+        <span style="color: red; font-size: 14px;" id="generated-pwd"></span>
+      </div>
+
+      <div class="col-8 m-auto pt-3 pb-3 text-center">
+        <form method="get">
+          <input required type="text" name="password" id="password" class="form-control" placeholder="password (required)">
+          <input type="text" name="search" id="search" class="mt-1 form-control" placeholder="job filter...">
+          <input class="mt-1" type="submit" value="Search">
+        </form>
+      </div>
+
+      <div class="col-8 m-auto pt-2 pb-4 text-center mt-1">
+        <table class="mt-4 table table-hover" style="background-color: rgb(224, 127, 0);" id="tbl-jobs">
+          <thead>
+            <tr class="text-white">
+              <th scope="col">#</th>
+              <th scope="col">Job</th>
+              <th scope="col">Main Attr.</th>
+              <th scope="col">Level</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Gold / Day</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for dbs in db %}
+            <tr class="text-white">
+              <th scope="row">{{dbs.id}}</th>
+              <td class="job">{{dbs.job}}</td>
+              <td class="attr">{{dbs.main_attribute}}</td>
+              <td class="lvl">{{dbs.level}}</td>
+              <td class="qnt">{{dbs.quantity}}</td>
+              <td class="sum"></td>
+              <td>
+                <a href="/edit/{{dbs.id}}" class="btn btn-primary">Edit</a>
+                <a href="/delete/{{dbs.id}}" class="btn btn-danger btnDel">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          <tfoot>
+            <tr class="text-center text-white">
+              <td colspan="10" id="golddayresult"></td>
+            </tr>
+          </tfoot>
+          </tbody>
+        </table>
+      </div>
+
+      <div id='earnings' class="row">
+        <div id="earning-col1"></div>
+        <div id="earning-col2"></div>
+        <div id="earning-col3"></div>
+      </div>
+
+      <!-- <div class="pagination">
+          {% if db.has_previous %}
+          <a href="?page={{db.previous_page_number}}"> < </a>
+          {% endif %}
+          
+          {{db.number}}
+          
+          {% if db.has_next %}
+          <a href="?page={{db.next_page_number}}"> > </a>
+          {% endif %}
+        </div> -->
+    </main>
+
+    {% include "./reuse/footer.html" %}
+
+
+  </div>
+
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'cover.css' %}">
+  <script src="{% static 'javascript.js' %}"></script>
+
+</body>
+
+</html>
