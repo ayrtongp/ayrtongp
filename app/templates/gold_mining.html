@@ -36,18 +36,16 @@
         <div class="col mx-1 h5 rounded-pill bg-primary">BinaryX (USD) ${{bnx_price}}</div>
       </div>
 
-      <div class="col-8 m-auto pt-3 pb-3 text-center">
+      <!-- <div class="col-8 m-auto pt-3 pb-3 text-center">
         <a href="/form" class="btn btn-success">Add Job</a>
         <a href="" id="generate-pwd-button" class="btn btn-success">Generate password</a>
         <br>
         <span style="color: red; font-size: 14px;" id="generated-pwd"></span>
-      </div>
+      </div> -->
 
       <div class="col-8 m-auto pt-3 pb-3 text-center">
         <form method="get">
-          <input required type="text" name="password" id="password" class="form-control" placeholder="password (required)">
-          <input type="text" name="search" id="search" class="mt-1 form-control" placeholder="job filter...">
-          <input class="mt-1" type="submit" value="Search">
+          <input type="text" name="adressid" id="adressid" class="mt-1 form-control" placeholder="Wallet Adress...">
         </form>
       </div>
 
@@ -55,33 +53,36 @@
         <table class="mt-4 table table-hover" style="background-color: rgb(224, 127, 0);" id="tbl-jobs">
           <thead>
             <tr class="text-white">
-              <th scope="col">#</th>
               <th scope="col">Job</th>
-              <th scope="col">Main Attr.</th>
               <th scope="col">Level</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Gold / Day</th>
-              <th scope="col">Ações</th>
+              <th scope="col">Strength</th>
+              <th scope="col">Agility</th>
+              <th scope="col">Constitution</th>
+              <th scope="col">Willpower</th>
+              <th scope="col">Intelligence</th>
+              <th scope="col">Spirit</th>
+              <th scope="col">Total Stats</th>
+              <th scope="col">Gold per Day</th>
             </tr>
           </thead>
           <tbody>
             {% for dbs in db %}
             <tr class="text-white">
-              <th scope="row">{{dbs.id}}</th>
-              <td class="job">{{dbs.job}}</td>
-              <td class="attr">{{dbs.main_attribute}}</td>
-              <td class="lvl">{{dbs.level}}</td>
-              <td class="qnt">{{dbs.quantity}}</td>
-              <td class="sum"></td>
-              <td>
-                <a href="/edit/{{dbs.id}}" class="btn btn-primary">Edit</a>
-                <a href="/delete/{{dbs.id}}" class="btn btn-danger btnDel">Delete</a>
-              </td>
+              <td class="job">{{dbs.7}}</td>      
+              <td class="lvl">{{dbs.8}}</td>
+              <td class="str">{{dbs.0}}</td>
+              <td class="agi">{{dbs.1}}</td>
+              <td class="con">{{dbs.2}}</td>
+              <td class="wil">{{dbs.3}}</td>
+              <td class="int">{{dbs.4}}</td>
+              <td class="spi">{{dbs.5}}</td>
+              <td class="tot">{{dbs.6}}</td>
+              <td class="gpd">{{dbs.9}}</td>
             </tr>
             {% endfor %}
           <tfoot>
             <tr class="text-center text-white">
-              <td colspan="10" id="golddayresult"></td>
+              <td colspan="10" id="golddayresult">Total Gold Per Day: {{total_gold}}</td>
             </tr>
           </tfoot>
           </tbody>
@@ -89,9 +90,9 @@
       </div>
 
       <div id='earnings' class="row">
-        <div id="earning-col1"></div>
-        <div id="earning-col2"></div>
-        <div id="earning-col3"></div>
+        <div id="earning-col1">USD por dia: {{gold_in_day_usd}}</div>
+        <div id="earning-col2">USD por semana: {{gold_in_week_usd}}</div>
+        <div id="earning-col3">USD por mês: {{gold_in_month_usd}}</div>
       </div>
 
       <!-- <div class="pagination">
